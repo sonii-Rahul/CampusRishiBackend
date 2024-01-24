@@ -4,7 +4,7 @@ const tenentSchema = new Schema(
     {
         tenentname:{
             type:String,
-            require: true,
+            required: true,
             unique:true,
             lowecase:true,
             trim: true,
@@ -13,7 +13,7 @@ const tenentSchema = new Schema(
         },
         Email:{
             type: String,
-            require: true,
+            required: true,
             unique:true,
             lowecase:true,
             trim: true
@@ -21,7 +21,7 @@ const tenentSchema = new Schema(
         },
         Description:{
             type:String,
-            require: true,
+            required: true,
             unique:true,
             lowecase:true,
             trim: true

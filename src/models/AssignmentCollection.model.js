@@ -15,7 +15,7 @@ const assignmentCollection = new Schema({
     },
     title:{
         type: String,
-        require: true,
+        required: true,
         unique: true,
         lowecase: true,
         trim: true,
@@ -24,7 +24,7 @@ const assignmentCollection = new Schema({
     },
     Description:{
         type:String,
-        require: true,
+        required: true,
         unique:true,
         lowecase:true,
         trim: true
@@ -32,7 +32,7 @@ const assignmentCollection = new Schema({
     },
     deadline:{
         type:Date,
-        require: true
+        required: true
     },
     status:{
         type:Boolean,

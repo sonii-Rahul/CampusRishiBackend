@@ -4,7 +4,7 @@ const schoolSchema = new Schema({
 
     tenentname:{
         type:String,
-        require: true,
+        required: true,
         unique:true,
         lowecase:true,
         trim: true,
@@ -13,7 +13,7 @@ const schoolSchema = new Schema({
     },
     fullName:{
         type:String,
-        require:true,
+        required:true,
         location:String,
         lowecase:true,
         trim: true,

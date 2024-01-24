@@ -11,7 +11,7 @@ const courseCollection = new Schema({
 
     courseName:{
         type: String,
-        require: true,
+        required: true,
         unique: true,
         lowecase: true,
         trim: true,
@@ -19,7 +19,7 @@ const courseCollection = new Schema({
     },
     Description:{
         type:String,
-        require: true,
+        required: true,
         unique:true,
         lowecase:true,
         trim: true
@@ -33,5 +33,5 @@ const courseCollection = new Schema({
 })
 
 
-export const  CourseCollection = mongoose.model("CourseCollecton",courseCollection)
+export const  CourseCollection = mongoose.model("CourseCollection",courseCollection)
 

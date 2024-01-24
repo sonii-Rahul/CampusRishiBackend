@@ -17,7 +17,7 @@ const userSchema = new Schema({
 
     username: {
         type: String,
-        require: true,
+        required: true,
         unique: true,
         lowecase: true,
         trim: true,
@@ -26,7 +26,7 @@ const userSchema = new Schema({
     },
     fullName: {
         type: String,
-        require: true,
+        required: true,
         unique: true,
         lowecase: true,
         trim: true,
@@ -35,7 +35,7 @@ const userSchema = new Schema({
     },
     password: {
         type: String,
-        require: [true, "password is required "]
+        required: [true, "password is requiredd "]
 
     },
 
@@ -46,14 +46,14 @@ const userSchema = new Schema({
     },
     role: {
         type: String,
-        required: true,
+        requiredd: true,
         enum: ["admin", "teacher", "student"]
     },
 
     avatar: {
 
         type: string, //cloudnary url
-        require: true
+        required: true
 
 
     }

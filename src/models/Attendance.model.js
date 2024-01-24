@@ -17,14 +17,14 @@ const attendanceSchema = new Schema({
     date:{
         type:Date,
 
-        require:true,
+        required:true,
         default:date.now
 
 
     },
     status:{
         type:Boolean,
-        require:true,
+        required:true,
         default:false,
 
     }
