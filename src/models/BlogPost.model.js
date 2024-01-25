@@ -1,4 +1,5 @@
-import mongoose,{Schema} from "mongoose";
+import mongoose, { Schema } from "mongoose";
+
 
 const blogSchema = new Schema({
 
@@ -9,17 +10,17 @@ const blogSchema = new Schema({
 
     },
 
-    userid:{
+    userid: {
         type: Schema.Types.ObjectId,
         ref: "User"
-        
+
     },
-    courseid:{
+    courseid: {
         type: Schema.Types.ObjectId,
         ref: "CourseCollection"
     },
 
-    title:{
+    title: {
         type: String,
         required: true,
         unique: true,
@@ -27,26 +28,28 @@ const blogSchema = new Schema({
         trim: true,
         index: true
     },
-    content:{
+    content: {
         type: String,
 
     },
-    date:{
-        type:Date,
-        default:Date.now
+    date: {
+        type: Date,
+        default: Date.now
 
     },
-    image:{
-        type:string,
-        
+    image: {
+        type: string,
+
     }
 
 
 
 
-},{
-    timestamps:true
+}, {
+    timestamps: true
 })
 
 
-export const Blog = mongoose.model("Blog",blogSchema)
+blogSchema.plugin(mongooseAggregatePaginate)
+
+export const Blog = mongoose.model("Blog", blogSchema)
