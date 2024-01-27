@@ -26,5 +26,11 @@ app.use(express.static("public"))
 app.use(cookieParser())
 
 
+//routes
+import  userRouter from "./routes/user.routes.js"
+import tenentRouter from "./routes/tenent.routers.js"
+app.use("/api/v1/users",userRouter)
+app.use("/api/v1/tenent",tenentRouter)
 
-export { app }
+
+export default app
