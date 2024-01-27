@@ -17,7 +17,8 @@ const schoolSchema = new Schema({
         index: true
     },
     location: {
-        type: String
+        type: String,
+        required:true
     }
 }, {
     timestamps: true

@@ -29,8 +29,10 @@ app.use(cookieParser());
 import userRouter from "./routes/user.routes.js";
 import tenentRouter from "./routes/tenent.routers.js";
 import schoolRouter from "./routes/school.routers.js"
+import  teacherRegister  from "./routes/teacher.routers.js";
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/tenent", tenentRouter);
 app.use("/api/v1/school", schoolRouter);
+app.use("/api/v1/teacher", teacherRegister);
 
 export default app;
