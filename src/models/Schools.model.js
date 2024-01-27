@@ -6,7 +6,7 @@ const schoolSchema = new Schema({
         type:String,
         required: true,
         unique:true,
-        lowecase:true,
+        lowercase:true,
         trim: true,
         index:true
 
@@ -14,11 +14,12 @@ const schoolSchema = new Schema({
     fullName:{
         type:String,
         required:true,
-        location:String,
-        lowecase:true,
+        lowercase:true,
         trim: true,
         index:true
 
+    },locaton:{
+        type:String
     }
 
 },{

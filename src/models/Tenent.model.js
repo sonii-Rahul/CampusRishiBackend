@@ -6,7 +6,7 @@ const tenentSchema = new Schema(
             type:String,
             required: true,
             unique:true,
-            lowecase:true,
+            lowercase:true,
             trim: true,
             index:true
 
@@ -15,7 +15,7 @@ const tenentSchema = new Schema(
             type: String,
             required: true,
             unique:true,
-            lowecase:true,
+            lowercase:true,
             trim: true
 
         },
@@ -23,7 +23,7 @@ const tenentSchema = new Schema(
             type:String,
             required: true,
             unique:true,
-            lowecase:true,
+            lowercase:true,
             trim: true
 
         },

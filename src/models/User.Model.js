@@ -1,5 +1,4 @@
 import mongoose, { Schema } from "mongoose";
-import mongooseAggregatePaginate from "mongoose-aggregate-paginate-v2";
 import { Jwt } from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
@@ -23,7 +22,7 @@ const userSchema = new Schema({
         type: String,
         required: true,
         unique: true,
-        lowecase: true,
+        lowercase: true,
         trim: true,
         index: true
 
@@ -32,7 +31,7 @@ const userSchema = new Schema({
         type: String,
         required: true,
         unique: true,
-        lowecase: true,
+        lowercase: true,
         trim: true,
         index: true
 
@@ -50,7 +49,7 @@ const userSchema = new Schema({
     },
     role: {
         type: String,
-        requiredd: true,
+        required: true,
         enum: ["admin", "teacher", "student"]
     },
 
@@ -101,7 +100,7 @@ userSchema.methods.accessTokenGentate = function(){
 }
 userSchema.methods.reFreshTokenGentate = function(){
 
-    return  jwt.sign(
+    return  Jwt.sign(
         {
             _id:this._id,
 

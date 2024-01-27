@@ -18,7 +18,7 @@ const attendanceSchema = new Schema({
         type:Date,
 
         required:true,
-        default:date.now
+        default:Date.now
 
 
     },

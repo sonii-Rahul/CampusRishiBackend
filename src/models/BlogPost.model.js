@@ -24,7 +24,7 @@ const blogSchema = new Schema({
         type: String,
         required: true,
         unique: true,
-        lowecase: true,
+        lowercase: true,
         trim: true,
         index: true
     },
@@ -38,7 +38,7 @@ const blogSchema = new Schema({
 
     },
     image: {
-        type: string,
+        type: String,
 
     }
 
