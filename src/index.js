@@ -22,7 +22,7 @@ dotenv.config({
 })
 
 app.listen(process.env.PORT,()=>{
-    console.log(`app is Listining to the por number ${process.env.PORT}`)
+    console.log(`app is Listining to the por number ${porte}`)
 })
 
 
