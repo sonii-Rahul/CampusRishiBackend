@@ -1,29 +1,26 @@
-import mongoose, { Schema }  from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 const schoolSchema = new Schema({
-
-    tenentname:{
-        type:String,
-        required: true,
-        unique:true,
-        lowercase:true,
+    tenentname: {
+        type: Schema.Types.ObjectId,
+        ref: "Tenent",
+        unique: true,
+        lowercase: true,
         trim: true,
-        index:true
-
+        index: true
     },
-    fullName:{
-        type:String,
-        required:true,
-        lowercase:true,
+    fullName: {
+        type: String,
+        required: true,
+        lowercase: true,
         trim: true,
-        index:true
-
-    },locaton:{
-        type:String
+        index: true
+    },
+    location: {
+        type: String
     }
+}, {
+    timestamps: true
+});
 
-},{
-    timestamps:true
-})
-
-export const School = mongoose.model("School",schoolSchema)
+export const School = mongoose.model("School", schoolSchema);
