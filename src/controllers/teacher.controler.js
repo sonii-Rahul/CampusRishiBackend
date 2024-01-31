@@ -5,6 +5,7 @@ import apiResponse from "../utils/apiResponse.js";
 import { Teacher } from "../models/Teacher.model.js";
 
 
+
 const teacherRegister = asyncHandler(async (req, res) => {
    console.log(req.body);
 
