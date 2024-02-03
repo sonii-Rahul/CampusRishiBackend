@@ -2,6 +2,8 @@ import { json } from "express"
 import { asyncHandler } from "../utils/asyncHandler.js"
 import { apiError } from "../utils/apiError.js"
 import { Tenent } from "../models/Tenent.model.js"
+import { User } from "../models/User.Model.js"
+
 
 import apiResponse from "../utils/apiResponse.js"
 
@@ -14,7 +16,12 @@ const tenentregister = asyncHandler(async (req, res) => {
 
       tenentname,
       Email,
-      Description
+      Description,
+      username,
+      fullName,
+      password,
+      role,
+
 
    } = req.body
    console.log(Email);
@@ -23,7 +30,7 @@ const tenentregister = asyncHandler(async (req, res) => {
 
 
 
-   if ([tenentname, Email, Description].some((field) => field?.trim() === "")) {
+   if ([tenentname, Email, Description,username,fullName,password,role].some((field) => field?.trim() === "")) {
 
       throw new apiError(400, "all field are required ")
 
@@ -33,14 +40,32 @@ const tenentregister = asyncHandler(async (req, res) => {
    const existtedtenent = await Tenent.findOne({
       $or: [{ Email }, { tenentname }]
    })
+   const existedusername = await User.findOne({
+      $or: [ { username }]
+   })
 
    if (existtedtenent) {
+      throw new apiError(409, "user alredy exist")
+   }
+   if (existedusername) {
       throw new apiError(409, "user alredy exist")
    }
 
    const tenent = await Tenent.create({
       tenentname, Email, Description
    })
+
+   const user = await User.create({
+      
+      tenentid:tenent._id,
+      username,
+      fullName,
+      password,
+      role
+
+   })
+
+   
 
    console.log(tenentname)
 
@@ -49,6 +74,11 @@ const tenentregister = asyncHandler(async (req, res) => {
    if (!createdUser) {
       throw new apiError(400, "something went wrong while registring the user ")
    }
+   if (!user) {
+      throw new apiError(400, "something went wrong while registring the user ")
+   }
+
+   
 
    return res.status(201).json(
       new apiResponse(200, createdUser, "Tenent registed successfully ")

@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-import { Jwt } from "jsonwebtoken";
+import  Jwt  from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
 
@@ -8,7 +8,8 @@ const userSchema = new Schema({
 
     tenentid: {
         type: Schema.Types.ObjectId,
-        ref: "Tenent"
+        ref: "Tenent",
+        required:true
 
     },
     schoolid: {
@@ -44,7 +45,7 @@ const userSchema = new Schema({
 
     refreshToken: {
 
-        type: string
+        type: String
 
     },
     role: {
@@ -55,8 +56,8 @@ const userSchema = new Schema({
 
     avatar: {
 
-        type: string, //cloudnary url
-        required: true
+        type: String, //cloudnary url
+        
 
 
     }

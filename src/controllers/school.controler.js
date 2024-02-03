@@ -4,11 +4,12 @@ import { apiError } from "../utils/apiError.js";
 import { School } from "../models/Schools.model.js";
 import apiResponse from "../utils/apiResponse.js";
 import { Tenent } from "../models/Tenent.model.js";
+import { registerUser } from "./user.controller.js";
 
 const Schoolregister = asyncHandler(async (req, res) => {
    console.log(req.body);
 
-   const { fullName, locaton, tenentname } = req.body;
+   const { fullName, locaton, tenentname,} = req.body;
 
    if (!fullName || !locaton || !tenentname) {
       throw new apiError(400, "field are required");
@@ -27,6 +28,8 @@ const Schoolregister = asyncHandler(async (req, res) => {
    if (existedSchool) {
       throw new apiError(409, "School already exists");
    }
+
+   registerUser(fullName)
 
    const school = await School.create({
       fullName,
