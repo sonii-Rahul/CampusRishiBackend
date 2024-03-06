@@ -9,7 +9,7 @@ const schoolSchema = new Schema({
         trim: true,
         index: true
     },
-    fullName: {
+    SchoolfullName: {
         type: String,
         required: true,
         lowercase: true,

@@ -9,7 +9,7 @@ const userSchema = new Schema({
     tenentid: {
         type: Schema.Types.ObjectId,
         ref: "Tenent",
-        required:true
+
 
     },
     schoolid: {
