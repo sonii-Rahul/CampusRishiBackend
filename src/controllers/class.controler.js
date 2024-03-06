@@ -1,0 +1,44 @@
+import { json } from "express";
+import { asyncHandler } from "../utils/asyncHandler.js";
+import { apiError } from "../utils/apiError.js";
+import { School } from "../models/Schools.model.js";
+import apiResponse from "../utils/apiResponse.js";
+import { ClassCollection} from "../models/ClassCollection.model.js";
+import { CourseCollection } from "../models/CourseCollection.model.js";
+
+
+const registerClass = asyncHandler( async (req , res)=>{
+    
+    const { name, schedule,coursename,teacherid,} = req.body;
+
+    if (!name||!schedule||!coursename||!teacherid){
+        throw new apiError("400","all class fields are required ")
+    }
+    const existedclass=await ClassCollection.findOne({
+        $and: [{ name },{schedule},{teacherid}]
+     })
+     if(existedclass){
+        throw new apiError("400","class alredy exist")
+     }
+     const existedcourse=await CourseCollection.findOne({
+        $and: [{coursename},{teacherid}]
+     })
+
+     if(!existedcourse){
+        throw new apiError ("400","no class found")
+
+     }
+
+     const creatednewclass= await ClassCollection.create({
+        courseid:existedcourse.id,
+        teacherid,
+        name,
+        schedule,
+
+     })
+     return res.status(201).json(
+        new apiResponse(200, creatednewclass, "class registered successfully")
+     );
+} )
+
+export { registerClass };

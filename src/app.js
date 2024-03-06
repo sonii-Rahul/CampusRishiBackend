@@ -30,9 +30,13 @@ import userRouter from "./routes/user.routes.js";
 import tenentRouter from "./routes/tenent.routers.js";
 import schoolRouter from "./routes/school.routers.js"
 import  teacherRegister  from "./routes/teacher.routers.js";
+import courseRouter from "./routes/course.routers.js"
+import classRouter from "./routes/class.routers.js"
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/tenent", tenentRouter);
 app.use("/api/v1/school", schoolRouter);
 app.use("/api/v1/teacher", teacherRegister);
+app.use("/api/v1/course",courseRouter)
+app.use("/api/v1/class",classRouter)
 
 export default app;
