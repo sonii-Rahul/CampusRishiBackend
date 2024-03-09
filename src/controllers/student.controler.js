@@ -4,18 +4,18 @@ import { apiError } from "../utils/apiError.js";
 import { School } from "../models/Schools.model.js";
 import apiResponse from "../utils/apiResponse.js";
 import { Tenent } from "../models/Tenent.model.js";
-import { registerUser } from "./user.controller.js";
 import { User } from "../models/User.Model.js"
 import { ClassCollection } from "../models/ClassCollection.model.js";
 import { Student } from "../models/Student.model.js";
+import { CourseCollection } from "../models/CourseCollection.model.js";
 
-const Schoolregister = asyncHandler(async (req, res) => {
+const StudentRegister = asyncHandler(async (req, res) => {
 
     console.log(req.body)
-    const {  fullName, SchoolfullName, location, username, password,classname,
+    const {  fullName, SchoolfullName, location, username, password,courseName,
         role } = req.body;
 
-        if(!fullName||!SchoolfullName||!location||!username||!password||!classname||!role){
+        if(!fullName||!SchoolfullName||!location||!username||!password||!courseName||!role){
             throw new apiError("400","all fields are required  in student")
 
         }
@@ -31,12 +31,12 @@ const Schoolregister = asyncHandler(async (req, res) => {
         if(!checkschool){
             throw new apiError("400","school not exist")
         }
-        const checkclass=await ClassCollection.findOne({
-            $and:[{classname}]
+        const checkCourse=await CourseCollection.findOne({
+            $and:[{courseName}]
 
         })
-        if(!classname){
-            throw new apiError("400","class not found")
+        if(!checkCourse){
+            throw new apiError("400","course not found")
         }
         const user=await User.create({
             fullName,
@@ -50,13 +50,15 @@ const Schoolregister = asyncHandler(async (req, res) => {
         if(!createduser){
             throw new apiError("401","something went wrong")
         }
+        console.log(checkCourse)
         const student=await Student.create({
             schoolid:createduser.schoolid,
             user:createduser.id,
-            classid:checkclass.id
+            courseid:checkCourse.id
 
         })
-        const createdstudent=await Student.findOne(student.id)
+        console.log("here")
+        const createdstudent=await Student.findById(student.id)
         if(!createdstudent){
             throw new apiError("400","something went wrong at student ")
         }

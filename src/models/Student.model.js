@@ -15,7 +15,7 @@ const studentSchema = new Schema({
 
 
     },
-    classid:{
+    courseid:{
         type: Schema.Types.ObjectId,
         ref: "ClassCollection"
     }

@@ -9,11 +9,12 @@ import { CourseCollection } from "../models/CourseCollection.model.js";
 
 const registerClass = asyncHandler( async (req , res)=>{
     
-    const { name, schedule,coursename,teacherid,} = req.body;
+    const { name, schedule,courseName,teacherid,} = req.body;
 
-    if (!name||!schedule||!coursename||!teacherid){
+    if (!name||!schedule||!courseName||!teacherid){
         throw new apiError("400","all class fields are required ")
     }
+    console.log(req.body)
     const existedclass=await ClassCollection.findOne({
         $and: [{ name },{schedule},{teacherid}]
      })
@@ -21,11 +22,11 @@ const registerClass = asyncHandler( async (req , res)=>{
         throw new apiError("400","class alredy exist")
      }
      const existedcourse=await CourseCollection.findOne({
-        $and: [{coursename},{teacherid}]
+        $and: [{courseName}]
      })
 
      if(!existedcourse){
-        throw new apiError ("400","no class found")
+        throw new apiError ("400","no course found")
 
      }
 
