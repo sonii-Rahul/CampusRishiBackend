@@ -5,10 +5,10 @@ const tenentSchema = new Schema(
         tenentname:{
             type:String,
             required: true,
-            unique:true,
             lowercase:true,
             trim: true,
-            index:true
+            index:true,
+            unique:true
 
         },
         Email:{
@@ -22,7 +22,6 @@ const tenentSchema = new Schema(
         Description:{
             type:String,
             required: true,
-            unique:true,
             lowercase:true,
             trim: true
 

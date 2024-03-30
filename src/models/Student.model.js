@@ -22,4 +22,15 @@ const studentSchema = new Schema({
 
 })
 
+studentSchema.methods.getUserDetails = async function () {
+    try {
+        // Populate the 'user' field to fetch associated user details
+        await this.populate('user').execPopulate();
+        // Access user details from the populated 'user' field
+        return this.user;
+    } catch (error) {
+        throw new Error("Error fetching user details:", error);
+    }
+};
+
 export const Student = mongoose.model("Student",studentSchema)

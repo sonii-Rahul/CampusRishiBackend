@@ -1,7 +1,7 @@
 import mongoose, { Schema } from "mongoose";
 
 const schoolSchema = new Schema({
-    tenentname: {
+    tenentid: {
         type: Schema.Types.ObjectId,
         ref: "Tenent",
         unique: true,

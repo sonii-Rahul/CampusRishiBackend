@@ -4,5 +4,5 @@ import{Studentattendance,getAttendance } from "../controllers/attendance.control
 const router = Router()
 
 router.route("/takeattendance").post(Studentattendance)
-router.route("/getattendance").post(getAttendance )
+router.route("/getattendance").get(getAttendance )
 export default router

@@ -45,11 +45,12 @@ const tenentregister = asyncHandler(async (req, res) => {
    })
 
    if (existtedtenent) {
-      throw new apiError(409, "user alredy exist")
+      throw new apiError(409, "tenet alredy exist")
    }
    if (existedusername) {
-      throw new apiError(409, "user alredy exist")
+      throw new apiError(408, "user alredy exist")
    }
+   console.log(tenentname)
 
    const tenent = await Tenent.create({
       tenentname, Email, Description
@@ -80,7 +81,7 @@ const tenentregister = asyncHandler(async (req, res) => {
 
    
 
-   return res.status(201).json(
+   return res.status(200).json(
       new apiResponse(200, createdUser, "Tenent registed successfully ")
    )
 

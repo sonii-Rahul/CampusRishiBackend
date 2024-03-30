@@ -52,40 +52,29 @@ const Studentattendance = asyncHandler(async (req, res) => {
 });
 
 const getAttendance = asyncHandler(async (req, res) => {
-    const { studentname, classid } = req.body;
+    const { userId} = req.body;
 
-    if (!studentname || !classid) {
-        throw new apiError("400", "Both student name and class ID are required.");
-    }
-
-    // Find the user based on the provided full name
-    const user = await User.findOne({ fullName: studentname });
-    if (!user) {
-        throw new apiError("404", "User not found.");
-    }
-
-    // Find the student associated with the user
-    const student = await Student.findOne({ user: user._id });
+    const student = await Student.findOne({ user: userId }).exec();
     if (!student) {
-        throw new apiError("404", "Student not found.");
+        throw new Error('Student not found');
     }
 
-    // Find the class
-    const classFound = await ClassCollection.findById(classid);
-    if (!classFound) {
-        throw new apiError("404", "Class not found.");
-    }
+    // Find all attendance records based on the student ID
+    const allAttendanceRecords = await Attendance.find({
+        studentid: student._id // Use the student ID to filter attendance records
+    }).exec();
 
-    // Find attendance records for the student and class
-    const attendanceRecords = await Attendance.find({ studentid: student._id, classid: classFound._id });
+    // Calculate the total number of days and days present
+    const totalDays = allAttendanceRecords.length;
+    const daysPresent = allAttendanceRecords.filter(record => record.status === true).length;
 
-    if (!attendanceRecords || attendanceRecords.length === 0) {
-        return res.status(200).json(new apiResponse(200, [], "No attendance records found."));
-    }
+    // Calculate attendance percentage
+    const attendancePercentage = ((daysPresent / totalDays) * 100).toFixed(2);
 
-    return res.status(200).json(new apiResponse(200, attendanceRecords, "Attendance records retrieved successfully."));
+   return res.status(201).json(new apiResponse(200, { totalDays, daysPresent, attendancePercentage }, "Attendance records added successfully."));
 });
 
 export { getAttendance };
 
 export {Studentattendance};
+
