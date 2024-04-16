@@ -10,8 +10,6 @@ import apiResponse from "../utils/apiResponse.js"
 
 const tenentregister = asyncHandler(async (req, res) => {
 
-   console.log(req.body);
-
    const {
 
       tenentname,
@@ -24,9 +22,6 @@ const tenentregister = asyncHandler(async (req, res) => {
 
 
    } = req.body
-   console.log(Email);
-
-   console.log(tenentname)
 
 
 
@@ -50,8 +45,6 @@ const tenentregister = asyncHandler(async (req, res) => {
    if (existedusername) {
       throw new apiError(408, "user alredy exist")
    }
-   console.log(tenentname)
-
    const tenent = await Tenent.create({
       tenentname, Email, Description
    })
@@ -65,10 +58,6 @@ const tenentregister = asyncHandler(async (req, res) => {
       role
 
    })
-
-   
-
-   console.log(tenentname)
 
    const createdUser = await Tenent.findById(tenent._id)
 

@@ -12,18 +12,14 @@ const Schoolregister = asyncHandler(async (req, res) => {
 
    const { SchoolfullName, location, username, password,
       role,tenentname} = req.body;
-      console.log(req.body);
-
    if (!SchoolfullName || !location ||!username || !password || !role ||!tenentname) {
       throw new apiError(400, "All school field are required");
    }
-   const tenent = await Tenent.findOne({ tenentname });
+   const tenent = await Tenent.findOne({ _id:tenentname });
 
    if (!tenent) {
        throw new apiError(404, "Tenent not found");
     }
-   console.log(tenent)
-
 
    const existedSchool = await School.findOne({
       $and: [{ SchoolfullName }, { location },{tenentname}]
@@ -38,19 +34,15 @@ const Schoolregister = asyncHandler(async (req, res) => {
    if (existedusername) {
       throw new apiError(409, "username already exists");
    }
-console.log("here")
+
    const school = await School.create({
 
       tenentid:tenent._id,
       SchoolfullName,
       location,
-   });
-console.log("moredown")
-   
+   });   
 
    const createdSchool = await School.findById(school._id);
-   console.log(createdSchool);
-
    if (!createdSchool) {
       throw new apiError(400, "Something went wrong while registering the user");
    }

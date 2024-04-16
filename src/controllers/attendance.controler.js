@@ -53,6 +53,7 @@ const Studentattendance = asyncHandler(async (req, res) => {
 
 const getAttendance = asyncHandler(async (req, res) => {
     const { userId} = req.body;
+    console.log(userId)
 
     const student = await Student.findOne({ user: userId }).exec();
     if (!student) {

@@ -11,7 +11,6 @@ import { CourseCollection } from "../models/CourseCollection.model.js";
 
 const StudentRegister = asyncHandler(async (req, res) => {
 
-    console.log(req.body)
     const {  fullName, SchoolfullName, location, username, password,courseName,
         role } = req.body;
 
@@ -50,14 +49,12 @@ const StudentRegister = asyncHandler(async (req, res) => {
         if(!createduser){
             throw new apiError("401","something went wrong")
         }
-        console.log(checkCourse)
         const student=await Student.create({
             schoolid:createduser.schoolid,
             user:createduser.id,
             courseid:checkCourse.id
 
         })
-        console.log("here")
         const createdstudent=await Student.findById(student.id)
         if(!createdstudent){
             throw new apiError("400","something went wrong at student ")

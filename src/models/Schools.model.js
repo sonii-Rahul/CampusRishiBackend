@@ -4,7 +4,6 @@ const schoolSchema = new Schema({
     tenentid: {
         type: Schema.Types.ObjectId,
         ref: "Tenent",
-        unique: true,
         lowercase: true,
         trim: true,
         index: true

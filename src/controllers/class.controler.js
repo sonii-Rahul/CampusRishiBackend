@@ -9,12 +9,15 @@ import { CourseCollection } from "../models/CourseCollection.model.js";
 
 const registerClass = asyncHandler( async (req , res)=>{
     
-    const { name, schedule,courseName,teacherid,} = req.body;
+    const { name,courseName,teacherid,} = req.body;
+    console.log(req.body);
+    schedule=Date.now();
 
-    if (!name||!schedule||!courseName||!teacherid){
+    if (!name||!courseName||!teacherid){
+
+        
         throw new apiError("400","all class fields are required ")
     }
-    console.log(req.body)
     const existedclass=await ClassCollection.findOne({
         $and: [{ name },{schedule},{teacherid}]
      })

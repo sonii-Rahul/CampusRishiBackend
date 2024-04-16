@@ -27,7 +27,6 @@ const genrateAccessAndRefreshTokens=async(userId)=>{
 const loginUser = asyncHandler( async (req , res)=>{
     
     const { username,password,} = req.body;
-    console.log(req.body)
     if(!username||!password){
         throw new apiError("400","all user fields are required")
     }
@@ -81,9 +80,7 @@ const logOutUser=asyncHandler(async(req,res)=>{
 
 const verifyLogin = async (req, res) => {
     try {
-        const userId = req.user._id;
-        console.log(req.user._id);
-       
+        const userId = req.user._id;       
         const verifiedUser = await User.findById(userId);
 
         if (verifiedUser) {

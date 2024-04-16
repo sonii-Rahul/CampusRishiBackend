@@ -26,6 +26,7 @@ import courseRouter from "./routes/course.routers.js"
 import classRouter from "./routes/class.routers.js"
 import studentRouter from "./routes/student.routes.js"
 import attendaceRouter from"./routes/attendance.routes.js"
+import fetchteacher from "./routes/teacher.routers.js"
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/tenent", tenentRouter);
 app.use("/api/v1/school", schoolRouter);
@@ -34,4 +35,5 @@ app.use("/api/v1/course",courseRouter)
 app.use("/api/v1/class",classRouter)
 app.use("/api/v1/student",studentRouter)
 app.use("/api/v1/attendance",attendaceRouter)
+app.use("/api/v1/teacher",fetchteacher)
 export default app;

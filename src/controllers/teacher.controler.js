@@ -4,11 +4,11 @@ import { School } from "../models/Schools.model.js";
 import apiResponse from "../utils/apiResponse.js";
 import { Teacher } from "../models/Teacher.model.js";
 import { User } from "../models/User.Model.js"
+import mongoose from "mongoose";
 
 
 
 const teacherRegister = asyncHandler(async (req, res) => {
-   console.log(req.body);
 
    const { TfullName, SchoolfullName, location, username, password,
       role } = req.body;
@@ -26,8 +26,6 @@ const teacherRegister = asyncHandler(async (req, res) => {
       throw new apiError(404, "School not found");
    }
 
-   console.log(schoolSearch);
-
    // Check for an existing teacher based on some criteria (e.g., fullName and schoolname)
    const existingTeacher = await Teacher.findOne({
       $and: [{ TfullName }, { SchoolfullName }]
@@ -43,8 +41,6 @@ const teacherRegister = asyncHandler(async (req, res) => {
       TfullName,
       location
    });
-
-   console.log(SchoolfullName);
 
    if (!newTeacher) {
       throw new apiError(500, "Something went wrong while registering the teacher");
@@ -77,5 +73,39 @@ const teacherRegister = asyncHandler(async (req, res) => {
       new apiResponse(200, newTeacher, "Teacher registered successfully")
    );
 });
+
+
+const fetchTeachersBySchoolId = asyncHandler(async (req, res) => {
+   const { schoolId } = req.body;
+    // Assuming schoolId is provided as a parameter
+    console.log("error is here");
+    console.log(req.body);
+
+   // Check if the schoolId is provided
+   if (!schoolId) {
+      throw new apiError(400, "School ID is required");
+   } 
+
+   // Fetch teachers by school ID
+   const teachers = await Teacher.find({ schoolid: schoolId });
+
+   // Check if any teachers are found
+   if (teachers.length === 0) {
+      console.log("No teachers found");
+      return res.status(404).json(
+         new apiResponse(404, null, "No teachers found")
+      );
+   }
+
+   // Teachers found
+   return res.status(200).json(
+      new apiResponse(200, teachers, "Teachers fetched successfully")
+   );
+});
+
+
+
+
+export { fetchTeachersBySchoolId };
 
 export { teacherRegister };

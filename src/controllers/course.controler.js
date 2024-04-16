@@ -50,4 +50,32 @@ const registerCourse = asyncHandler( async (req , res)=>{
      );
 } )
 
+const getCoursesBySchool = asyncHandler(async (req, res) => {
+   const { SchoolfullName } = req.body;
+
+   if (!SchoolfullName) {
+       throw new apiError(400, "SchoolfullName parameter is required");
+   }
+
+   const existedSchool = await School.findOne({
+      $and: [{ SchoolfullName }]
+   });
+
+   if (!existedSchool) {
+       throw new apiError(404, "School not found");
+   }
+
+   const courses = await CourseCollection.find({ schoolid: existedSchool.id });
+
+   if (!courses || courses.length === 0) {
+       throw new apiError(404, "No courses found for the specified school");
+   }
+
+   return res.status(200).json(
+       new apiResponse(200, courses, "Courses retrieved successfully")
+   );
+});
+
+export { getCoursesBySchool };
+
 export { registerCourse};
