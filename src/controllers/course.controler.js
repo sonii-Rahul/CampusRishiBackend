@@ -76,6 +76,33 @@ const getCoursesBySchool = asyncHandler(async (req, res) => {
    );
 });
 
+const getCoursesBySchoolId = asyncHandler(async (req, res) => {
+    const { schoolid } = req.body; // Assuming schoolId is provided as a route parameter
+    const schoolId=schoolid;
+    if (!schoolId) {
+        throw new apiError(400, "School ID parameter is required");
+    }
+ 
+    const existedSchool = await School.findById(schoolId);
+ 
+    if (!existedSchool) {
+        throw new apiError(404, "School not found");
+    }
+ 
+    const courses = await CourseCollection.find({ schoolid: schoolId });
+ 
+    if (!courses || courses.length === 0) {
+        throw new apiError(404, "No courses found for the specified school");
+    }
+ 
+    return res.status(200).json(
+        new apiResponse(200, courses, "Courses retrieved successfully")
+    );
+ });
+ 
+ export { getCoursesBySchoolId };
+ 
+
 export { getCoursesBySchool };
 
 export { registerCourse};

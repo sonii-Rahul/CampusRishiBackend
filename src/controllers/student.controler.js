@@ -13,6 +13,7 @@ const StudentRegister = asyncHandler(async (req, res) => {
 
     const {  fullName, SchoolfullName, location, username, password,courseName,
         role } = req.body;
+    
 
         if(!fullName||!SchoolfullName||!location||!username||!password||!courseName||!role){
             throw new apiError("400","all fields are required  in student")

@@ -11,7 +11,7 @@ const registerClass = asyncHandler( async (req , res)=>{
     
     const { name,courseName,teacherid,} = req.body;
     console.log(req.body);
-    schedule=Date.now();
+    const schedule=Date.now();
 
     if (!name||!courseName||!teacherid){
 
@@ -44,5 +44,7 @@ const registerClass = asyncHandler( async (req , res)=>{
         new apiResponse(200, creatednewclass, "class registered successfully")
      );
 } )
+
+
 
 export { registerClass };

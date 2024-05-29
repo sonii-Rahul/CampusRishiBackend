@@ -16,7 +16,6 @@ const assignmentCollection = new Schema({
     title:{
         type: String,
         required: true,
-        unique: true,
         lowecase: true,
         trim: true,
         index: true
@@ -24,8 +23,7 @@ const assignmentCollection = new Schema({
     },
     Description:{
         type:String,
-        required: true,
-        unique:true,
+        required: true, 
         lowercase:true,
         trim: true
 

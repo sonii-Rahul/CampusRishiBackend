@@ -8,7 +8,7 @@ const tenentSchema = new Schema(
             lowercase:true,
             trim: true,
             index:true,
-            unique:true
+           
 
         },
         Email:{

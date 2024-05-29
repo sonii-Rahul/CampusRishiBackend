@@ -21,6 +21,7 @@ const teacherRegister = asyncHandler(async (req, res) => {
    const schoolSearch = await School.findOne({
       $and: [{ SchoolfullName }, { location }]
    });
+   console.log(req.body)
 
    if (!schoolSearch) {
       throw new apiError(404, "School not found");
@@ -76,11 +77,9 @@ const teacherRegister = asyncHandler(async (req, res) => {
 
 
 const fetchTeachersBySchoolId = asyncHandler(async (req, res) => {
-   const { schoolId } = req.body;
-    // Assuming schoolId is provided as a parameter
-    console.log("error is here");
-    console.log(req.body);
-
+   const { schoolid} = req.body;
+   const schoolId=schoolid;
+    
    // Check if the schoolId is provided
    if (!schoolId) {
       throw new apiError(400, "School ID is required");

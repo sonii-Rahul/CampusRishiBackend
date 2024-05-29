@@ -13,7 +13,7 @@ const classCollection = new  Schema({
     name:{
         type: String,
         required: true,
-        unique: true,
+        
         lowercase: true,
         trim: true,
         index: true

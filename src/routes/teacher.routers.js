@@ -6,5 +6,5 @@ import {teacherRegister,fetchTeachersBySchoolId } from "../controllers/teacher.c
 const router = Router()
 
 router.route("/teacherregister").post(teacherRegister)
-router.route("/fetchteacher").get(fetchTeachersBySchoolId)
+router.route("/fetchteacher").post(fetchTeachersBySchoolId)
 export default router
